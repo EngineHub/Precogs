@@ -19,37 +19,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.me4502.precogs;
+package com.me4502.precogs.service;
 
-import com.google.inject.Inject;
-import com.me4502.precogs.detection.DetectionTypeRegistryModule;
-import org.slf4j.Logger;
-import org.spongepowered.api.Sponge;
+import com.me4502.precogs.detection.DetectionType;
 import org.spongepowered.api.entity.living.player.Player;
-import org.spongepowered.api.event.Listener;
-import org.spongepowered.api.event.filter.Getter;
-import org.spongepowered.api.event.game.state.GamePreInitializationEvent;
-import org.spongepowered.api.event.game.state.GameStartedServerEvent;
-import org.spongepowered.api.event.network.ClientConnectionEvent;
-import org.spongepowered.api.plugin.Plugin;
-import org.spongepowered.api.text.Text;
-import org.spongepowered.api.text.format.TextColors;
-import org.spongepowered.api.text.format.TextStyles;
 
-@Plugin(
-        id = "precogs",
-        name = "Precogs",
-        description = "Service-based API for AntiCheat plugins.",
-        authors = {
-                "Me4502"
-        }
-)
-public class Precogs {
+import java.util.List;
+import java.util.Optional;
 
-    @Inject private Logger logger;
+/**
+ * A base AntiCheat service for plugins to implement.
+ *
+ * All implementing plugins should provide this to the Sponge Services API.
+ */
+public interface AntiCheatService {
 
-    @Listener
-    public void onServerPreInitialize(GamePreInitializationEvent event) {
-        Sponge.getRegistry().registerModule(new DetectionTypeRegistryModule());
-    }
+    /**
+     * Requests a {@link BypassTicket}.
+     *
+     * <p>
+     *     If the bypass ticket is provided, this will disable the given
+     *     {@link DetectionType}s for the given player.
+     * </p>
+     *
+     * @param player The player.
+     * @param detectionTypes The detection types list.
+     * @return The bypass ticket if provided.
+     */
+    Optional<BypassTicket> requestBypassTicket(Player player, List<DetectionType> detectionTypes);
 }

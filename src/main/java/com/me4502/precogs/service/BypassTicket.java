@@ -19,37 +19,49 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.me4502.precogs;
+package com.me4502.precogs.service;
 
-import com.google.inject.Inject;
-import com.me4502.precogs.detection.DetectionTypeRegistryModule;
-import org.slf4j.Logger;
-import org.spongepowered.api.Sponge;
+import com.me4502.precogs.detection.DetectionType;
 import org.spongepowered.api.entity.living.player.Player;
-import org.spongepowered.api.event.Listener;
-import org.spongepowered.api.event.filter.Getter;
-import org.spongepowered.api.event.game.state.GamePreInitializationEvent;
-import org.spongepowered.api.event.game.state.GameStartedServerEvent;
-import org.spongepowered.api.event.network.ClientConnectionEvent;
-import org.spongepowered.api.plugin.Plugin;
-import org.spongepowered.api.text.Text;
-import org.spongepowered.api.text.format.TextColors;
-import org.spongepowered.api.text.format.TextStyles;
 
-@Plugin(
-        id = "precogs",
-        name = "Precogs",
-        description = "Service-based API for AntiCheat plugins.",
-        authors = {
-                "Me4502"
-        }
-)
-public class Precogs {
+import java.util.List;
 
-    @Inject private Logger logger;
+/**
+ * A ticket that allows temporarily disabling detections of certain types on a player.
+ *
+ * <p>
+ *     Through the use of a try-with-resources construct, it is possible to have this
+ *     automatically disable itself after it has been finished with.
+ * </p>
+ *
+ * <p>
+ *     Failure to call the BypassTicket#close method will allow the player to bypass
+ *     the detections indefinitely.
+ * </p>
+ */
+public interface BypassTicket extends AutoCloseable {
 
-    @Listener
-    public void onServerPreInitialize(GamePreInitializationEvent event) {
-        Sponge.getRegistry().registerModule(new DetectionTypeRegistryModule());
-    }
+    /**
+     * Gets the {@link Player} this ticket is valid for.
+     *
+     * @return The player.
+     */
+    Player getPlayer();
+
+    /**
+     * Gets a list of the {@link DetectionType}s this ticket disabled.
+     *
+     * @return The detection type list.
+     */
+    List<DetectionType> getDetectionTypes();
+
+    /**
+     * Closes this bypass ticket, re-enabling detections.
+     *
+     * <p>
+     *     If used in a try-with-resources block,
+     *     this will be called automatically.
+     * </p>
+     */
+    void close();
 }

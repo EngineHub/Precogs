@@ -1,5 +1,6 @@
 plugins {
     id 'org.spongepowered.plugin' version '0.8.1'
+    id "com.github.hierynomus.license" version "0.12.1"
 }
 
 group = pluginGroup
@@ -7,6 +8,22 @@ version = pluginVersion
 
 dependencies {
     compile 'org.spongepowered:spongeapi:5.1.0-SNAPSHOT'
+}
+
+license {
+    ext {
+        year = Calendar.getInstance().get(Calendar.YEAR)
+    }
+
+    header = file('HEADER.txt')
+    include '**/*.java'
+
+    ignoreFailures = false
+    strictCheck = true
+
+    mapping {
+        java = 'SLASHSTAR_STYLE'
+    }
 }
 
 sponge.plugin.id = pluginId
