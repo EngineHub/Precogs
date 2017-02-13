@@ -35,7 +35,6 @@ public class CommonDetectionTypes {
 
     private static final Map<Category, ImmutableList<DetectionType>> DETECTION_TYPES_ARRAY = ImmutableMap.<Category, ImmutableList<DetectionType>>builder()
             .put(Category.MOVEMENT, ImmutableList.of())
-            .put(Category.FLY, ImmutableList.of())
             .put(Category.COMBAT, ImmutableList.of())
             .put(Category.INVENTORY, ImmutableList.of())
             .put(Category.INTERACTION, ImmutableList.of())
@@ -74,7 +73,6 @@ public class CommonDetectionTypes {
      */
     public enum Category {
         MOVEMENT,
-        FLY,
         COMBAT,
         INVENTORY,
         INTERACTION,

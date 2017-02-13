@@ -23,6 +23,7 @@ package com.me4502.precogs.service;
 
 import com.me4502.precogs.detection.DetectionType;
 import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.entity.living.player.User;
 
 import java.util.List;
 import java.util.Optional;
@@ -47,4 +48,31 @@ public interface AntiCheatService {
      * @return The bypass ticket if provided.
      */
     Optional<BypassTicket> requestBypassTicket(Player player, List<DetectionType> detectionTypes);
+
+    /**
+     * Gets the violation level of the {@link User} for the {@link DetectionType}
+     * as a double.
+     *
+     * <p>
+     *     Double precision is not guaranteed to be provided by the AntiCheat plugin.
+     * </p>
+     *
+     * @param user The user.
+     * @param detectionType The detection type.
+     * @return The violation level
+     */
+    double getViolationLevel(User user, DetectionType detectionType);
+
+    /**
+     * Logs a violation on a {@link User} of a specific {@link DetectionType}.
+     *
+     * <p>
+     *     Double precision is not guaranteed to be supported by the AntiCheat plugin.
+     * </p>
+     *
+     * @param user The user.
+     * @param detectionType The detection type.
+     * @param violationLevel The violation level.
+     */
+    void logViolation(User user, DetectionType detectionType, double violationLevel);
 }
