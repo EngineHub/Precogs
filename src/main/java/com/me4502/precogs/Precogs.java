@@ -22,19 +22,13 @@
 package com.me4502.precogs;
 
 import com.google.inject.Inject;
+import com.me4502.precogs.detection.DetectionType;
 import com.me4502.precogs.detection.DetectionTypeRegistryModule;
 import org.slf4j.Logger;
 import org.spongepowered.api.Sponge;
-import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.Listener;
-import org.spongepowered.api.event.filter.Getter;
 import org.spongepowered.api.event.game.state.GamePreInitializationEvent;
-import org.spongepowered.api.event.game.state.GameStartedServerEvent;
-import org.spongepowered.api.event.network.ClientConnectionEvent;
 import org.spongepowered.api.plugin.Plugin;
-import org.spongepowered.api.text.Text;
-import org.spongepowered.api.text.format.TextColors;
-import org.spongepowered.api.text.format.TextStyles;
 
 @Plugin(
         id = "precogs",
@@ -50,6 +44,6 @@ public class Precogs {
 
     @Listener
     public void onServerPreInitialize(GamePreInitializationEvent event) {
-        Sponge.getRegistry().registerModule(new DetectionTypeRegistryModule());
+        Sponge.getRegistry().registerModule(DetectionType.class, new DetectionTypeRegistryModule());
     }
 }
