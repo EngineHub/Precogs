@@ -22,11 +22,13 @@
 package com.me4502.precogs.service;
 
 import com.me4502.precogs.detection.DetectionType;
+import org.spongepowered.api.Sponge;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.entity.living.player.User;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 /**
  * A base AntiCheat service for plugins to implement.
@@ -45,9 +47,37 @@ public interface AntiCheatService {
      *
      * @param player The player.
      * @param detectionTypes The detection types list.
+     * @param plugin The plugin object.
      * @return The bypass ticket if provided.
      */
-    Optional<BypassTicket> requestBypassTicket(Player player, List<DetectionType> detectionTypes);
+    Optional<BypassTicket> requestBypassTicket(Player player, List<DetectionType> detectionTypes, Object plugin);
+
+    /**
+     * Requests a {@link BypassTicket}.
+     *
+     * <p>
+     *     If the bypass ticket is provided, this will disable the given
+     *     {@link DetectionType}s for the given player.
+     * </p>
+     *
+     * @param player The player.
+     * @param detectionTypes The detection types list.
+     * @param plugin The plugin object.
+     * @param delay The delay before closing.
+     * @param timeUnit The {@link TimeUnit} of the delay.
+     * @return The bypass ticket if provided.
+     */
+    default Optional<BypassTicket> requestTimedBypassTicket(Player player, List<DetectionType> detectionTypes,
+            Object plugin, long delay, TimeUnit timeUnit) {
+        Optional<BypassTicket> bypassTicket = requestBypassTicket(player, detectionTypes, plugin);
+        bypassTicket.ifPresent(ticket -> Sponge.getScheduler().createTaskBuilder().delay(delay, timeUnit).execute(() -> {
+            if (!ticket.isClosed()) {
+                ticket.close();
+            }
+        }).submit(plugin));
+
+        return bypassTicket;
+    }
 
     /**
      * Gets the violation level of the {@link User} for the {@link DetectionType}
@@ -75,4 +105,20 @@ public interface AntiCheatService {
      * @param violationLevel The violation level.
      */
     void logViolation(User user, DetectionType detectionType, double violationLevel);
+
+    /**
+     * Logs a violation on a {@link User} of a specific {@link DetectionType}.
+     *
+     * <p>
+     *     Double precision is not guaranteed to be supported by the AntiCheat plugin.
+     *
+     *     Descriptions are also not guaranteed to be respected by the AntiCheat plugin.
+     * </p>
+     *
+     * @param user The user.
+     * @param detectionType The detection type.
+     * @param violationLevel The violation level.
+     * @param description The violation description.
+     */
+    void logViolation(User user, DetectionType detectionType, double violationLevel, String description);
 }

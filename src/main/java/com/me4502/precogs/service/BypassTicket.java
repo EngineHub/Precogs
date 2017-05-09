@@ -56,6 +56,13 @@ public interface BypassTicket extends AutoCloseable {
     List<DetectionType> getDetectionTypes();
 
     /**
+     * Gets whether this BypassTicket has been closed.
+     *
+     * @return If the ticket is closed
+     */
+    boolean isClosed();
+
+    /**
      * Closes this bypass ticket, re-enabling detections.
      *
      * <p>
