@@ -23,6 +23,7 @@ package com.me4502.precogs.detection;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Lists;
 
 import java.util.List;
 import java.util.Map;
@@ -33,14 +34,14 @@ import java.util.Map;
  */
 public class CommonDetectionTypes {
 
-    private static final Map<Category, ImmutableList<DetectionType>> DETECTION_TYPES_ARRAY = ImmutableMap.<Category, ImmutableList<DetectionType>>builder()
-            .put(Category.MOVEMENT, ImmutableList.of())
-            .put(Category.COMBAT, ImmutableList.of())
-            .put(Category.INVENTORY, ImmutableList.of())
-            .put(Category.INTERACTION, ImmutableList.of())
-            .put(Category.CHAT, ImmutableList.of())
-            .put(Category.BREAK, ImmutableList.of())
-            .put(Category.PLACE, ImmutableList.of())
+    private static final Map<Category, List<DetectionType>> DETECTION_TYPES_ARRAY = ImmutableMap.<Category, List<DetectionType>>builder()
+            .put(Category.MOVEMENT, Lists.newArrayList())
+            .put(Category.COMBAT, Lists.newArrayList())
+            .put(Category.INVENTORY, Lists.newArrayList())
+            .put(Category.INTERACTION, Lists.newArrayList())
+            .put(Category.CHAT, Lists.newArrayList())
+            .put(Category.BREAK, Lists.newArrayList())
+            .put(Category.PLACE, Lists.newArrayList())
             .build();
 
     /**
@@ -50,7 +51,7 @@ public class CommonDetectionTypes {
      * @return The list of detections.
      */
     public static ImmutableList<DetectionType> getDetectionTypesFor(Category category) {
-        return DETECTION_TYPES_ARRAY.get(category);
+        return ImmutableList.copyOf(DETECTION_TYPES_ARRAY.get(category));
     }
 
     /**
@@ -65,7 +66,7 @@ public class CommonDetectionTypes {
      * @param detectionTypes The detection type list.
      */
     public static void provideDetectionTypesFor(Category category, List<DetectionType> detectionTypes) {
-        DETECTION_TYPES_ARRAY.put(category, ImmutableList.copyOf(detectionTypes));
+        DETECTION_TYPES_ARRAY.get(category).addAll(detectionTypes);
     }
 
     /**
