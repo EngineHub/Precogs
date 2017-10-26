@@ -33,7 +33,7 @@ import org.spongepowered.api.plugin.Plugin;
 @Plugin(
         id = "precogs",
         name = "Precogs",
-        version = "1.1-SNAPSHOT",
+        version = "1.2-SNAPSHOT",
         description = "Service-based API for AntiCheat plugins.",
         authors = {
                 "Me4502"
