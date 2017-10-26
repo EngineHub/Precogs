@@ -50,7 +50,7 @@ public class CommonDetectionTypes {
      * @param category The category.
      * @return The list of detections.
      */
-    public static ImmutableList<DetectionType> getDetectionTypesFor(Category category) {
+    public static List<DetectionType> getDetectionTypesFor(Category category) {
         return ImmutableList.copyOf(DETECTION_TYPES_ARRAY.get(category));
     }
 
