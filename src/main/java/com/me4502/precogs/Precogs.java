@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017-2017 Me4502 (Matthew Miller)
+ * Copyright (c) 2017-2018 Me4502 (Matthew Miller)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -33,7 +33,7 @@ import org.spongepowered.api.plugin.Plugin;
 @Plugin(
         id = "precogs",
         name = "Precogs",
-        version = "1.2-SNAPSHOT",
+        version = "1.3-SNAPSHOT",
         description = "Service-based API for AntiCheat plugins.",
         authors = {
                 "Me4502"
