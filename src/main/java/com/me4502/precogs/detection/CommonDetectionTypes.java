@@ -55,6 +55,21 @@ public class CommonDetectionTypes {
     }
 
     /**
+     * Provides a {@link DetectionType} for the {@link Category}.
+     *
+     * <p>
+     *     This is built for AntiCheat plugins to provide via. If you are not
+     *     an anticheat plugin please do not call this method.
+     * </p>
+     *
+     * @param category The category.
+     * @param detectionType The detection type.
+     */
+    public static void provideDetectionTypeFor(Category category, DetectionType detectionType) {
+        DETECTION_TYPES_ARRAY.get(category).add(detectionType);
+    }
+
+    /**
      * Provides a list of {@link DetectionType}s for the {@link Category}.
      *
      * <p>
