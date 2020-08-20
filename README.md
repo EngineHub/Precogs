@@ -1,4 +1,4 @@
-Precogs [![Build Status](https://travis-ci.org/me4502/Precogs.svg?branch=master)](https://travis-ci.org/me4502/Precogs)
+Precogs
 =======
 
 An AntiCheat service and API built for Sponge.
@@ -6,15 +6,29 @@ An AntiCheat service and API built for Sponge.
 * Extensible system for plugins to disable detections temporarily.
 * Ability for plugins to log and retrieve user violation level.
 
-## Prerequisites
-* [Java] 8
-* Sponge
 
-## Building
-__Note:__ If you do not have [Gradle] installed then use ./gradlew for Unix systems or Git Bash and gradlew.bat for Windows systems in place of any 'gradle' command.
+Compiling
+---------
 
-In order to build Precogs you simply need to run the `gradle build` command. You can find the compiled JAR file in `./build/libs` labeled similarly
- to 'Precogs-x.x-SNAPSHOT.jar'.
+See [COMPILING.md](COMPILING.md) for a guide on compiling Precogs.
+
+Contributing
+------------
+
+We happily accept contributions, especially through pull requests on GitHub.
+Submissions must be licensed under the GNU General Public License v3.
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for important guidelines to follow.
+
+Links
+-----
+
+* [Visit our website](https://enginehub.org/)
+* [Discord](https://discord.gg/enginehub)
+* [IRC channel](https://webchat.esper.net/?join=sk89q) (#sk89q on irc.esper.net)
+* [Issue tracker](https://github.com/EngineHub/Precogs/issues)
+* [Continuous integration](https://builds.enginehub.org) [![Build Status](https://ci.enginehub.org/app/rest/builds/buildType:bt10,branch:master/statusIcon.svg)](https://ci.enginehub.org/viewType.html?buildTypeId=bt10&guest=1)
+
 
 ## Plugins using Precogs
 * Guardian

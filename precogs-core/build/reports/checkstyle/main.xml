@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="8.34">
+<file name="C:\workspaces\sk89q\Precogs\precogs-core\src\main\java\org\enginehub\precogs\detection\CommonDetectionTypes.java">
+</file>
+<file name="C:\workspaces\sk89q\Precogs\precogs-core\src\main\java\org\enginehub\precogs\detection\DetectionType.java">
+</file>
+<file name="C:\workspaces\sk89q\Precogs\precogs-core\src\main\java\org\enginehub\precogs\service\AntiCheatService.java">
+</file>
+<file name="C:\workspaces\sk89q\Precogs\precogs-core\src\main\java\org\enginehub\precogs\service\BypassTicket.java">
+</file>
+</checkstyle>

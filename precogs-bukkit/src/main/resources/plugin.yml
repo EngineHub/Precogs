@@ -1,0 +1,4 @@
+name: Precogs
+main: org.enginehub.precogs.bukkit.PrecogsPlugin
+version: "${internalVersion}"
+api-version: 1.13
